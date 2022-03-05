@@ -5,9 +5,14 @@ var ntitle = document.getElementById('n-title');
 var nbody = document.getElementById('n-body');
 var tableDiv = document.getElementById('tbl-div');
 var search = document.getElementById('srch');
+var resetBtn = document.getElementById('reset');
 
 var noteCount = 0;
 var newNote = '';
+var isUpdate = false;
+var record = '';
+var note = '';
+var body = '';
 
 //---events---
 
@@ -23,6 +28,12 @@ search.addEventListener('keyup', searchNote);
 // for remove
 items.addEventListener('click', removeNote);
 
+// for view & update
+items.addEventListener('click', viewNUpdateNote);
+ 
+// for reset
+resetBtn.addEventListener('click', resetAll);
+
 //---functions---
 
 // update table
@@ -30,7 +41,20 @@ function updateTable(){
     // display the table when notes get added
     if(noteCount > 0){
         tableDiv.style.display = '';
-        items.appendChild(newNote);
+        
+        // update note
+        if(isUpdate){
+            note.firstChild.textContent = ntitle.value;
+            note.lastChild.textContent = nbody.value;
+            
+            // reset update & note count
+            isUpdate = false;
+            noteCount--;
+        }
+        // add new note
+        else{
+            items.appendChild(newNote);
+        }
     }
     else{
         tableDiv.style.display = 'none';
@@ -91,6 +115,9 @@ function addNote(e){
         // add or update the note of the table
         updateTable();
     }
+
+    // reset all
+    resetAll();
 }
 
 // search notes
@@ -118,5 +145,37 @@ function searchNote(e){
 
 // remove notes
 function removeNote(e){
-    
+    if(e.target.id === 'del'){
+        if(confirm("Are you sure ?")){
+            // delete notes
+            var tr = e.target.parentElement.parentElement;
+            items.removeChild(tr);
+
+            // update table
+            noteCount--;
+            if(noteCount === 0){
+                updateTable();
+            }
+        }
+    }
+}
+
+// view and update notes
+function viewNUpdateNote(e){
+    if(e.target.id === 'vw'){
+        // get the element values & update input fields
+        record = e.target.parentElement.parentElement;
+        note = record.firstChild;
+        ntitle.value = note.firstChild.textContent;
+        nbody.value = note.lastChild.textContent;
+        isUpdate = true;
+    }
+}
+
+// reset all
+function resetAll(){
+    ntitle.value = '';
+    nbody.value = '';
+    isUpdate = false;
+    newNote = '';
 }
