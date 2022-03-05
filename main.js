@@ -115,3 +115,8 @@ function searchNote(e){
         }
     });
 }
+
+// remove notes
+function removeNote(e){
+    
+}
