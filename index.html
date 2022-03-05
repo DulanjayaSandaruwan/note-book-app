@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Note Book</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+        <!--header-->
+<header>
+        
+    <div class="logo">
+        <h2>Note Book</h2>
+    </div>
+    <div class="search">
+        <input type="text" id="srch" placeholder="Search a note..">
+    </div>
+
+</header>
+
+        <!--container-->
+    <div class="container" id="con-body">
+        <!--input form-->
+        <div class="inp-frm">
+            <form action="" id="add-frm">
+                <h3>Add a note</h3>
+                <input type="text" id="n-title" placeholder="Title..">
+                <textarea id="n-body" placeholder="Note Boady.."></textarea>
+                <button type="submit" id="save">Save</button>
+                <button type="reset" id="reset">Reset</button>
+
+            </form>
+        </div>
+
+        <!--table-->
+        <div class="table" id="tbl-div">
+            <table id="items">
+                <tr>
+                    <th>Title</th>
+                    <th>View</th>
+                    <th>Delete</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+        <!--external script-->
+    <script src="./main.js"></script>
+</body>
+</html>
