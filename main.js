@@ -4,6 +4,7 @@ var items = document.getElementById('items');
 var ntitle = document.getElementById('n-title');
 var nbody = document.getElementById('n-body');
 var tableDiv = document.getElementById('tbl-div');
+var search = document.getElementById('srch');
 
 var noteCount = 0;
 var newNote = '';
@@ -12,7 +13,15 @@ var newNote = '';
 
 // for page loads
 window.onload = updateTable;
+
+// for form submit
 form.addEventListener('submit', addNote);
+
+// for search
+search.addEventListener('keyup', searchNote);
+
+// for remove
+items.addEventListener('click', removeNote);
 
 //---functions---
 
@@ -82,4 +91,27 @@ function addNote(e){
         // add or update the note of the table
         updateTable();
     }
+}
+
+// search notes
+function searchNote(e){
+    // text to lower case
+    var searchText = e.target.value.toLowerCase();
+
+    // get list
+    var list = items.getElementsByClassName('item');
+    
+    // convert to an array
+    var listArr = Array.from(list);
+    listArr.forEach(function(item){
+        // get title
+        var noteTitle = item.firstChild.textContent;
+        // match
+        if(noteTitle.toLocaleLowerCase().indexOf(searchText) != -1){
+            item.style.display = '';
+        }
+        else{
+            item.style.display = 'none';
+        }
+    });
 }

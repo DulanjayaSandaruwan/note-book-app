@@ -121,6 +121,8 @@ header .search input{
     background-color: #0984e3;
     border-collapse: collapse;
 }
+
+/* hide note body , after create a span tag on js file */
 .container .table .note-body{
     display: none;
 }
